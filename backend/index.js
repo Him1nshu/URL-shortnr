@@ -1,5 +1,6 @@
 const express = require('express');
 const crypto = require('crypto');
+const storage=localStorage();
 
 const app = express();
 const PORT = 3000;
@@ -37,7 +38,9 @@ app.post('/api/shorten', (req, res) => {
 });
 
 app.get('/:code', (req, res) => {
+  //storage.setItem()
   const entry = urls.get(req.params.code);
+  
   if (!entry) return res.status(404).json({ error: 'URL not found' });
   res.redirect(entry.url);
 });
